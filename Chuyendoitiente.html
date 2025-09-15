@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<table>
+  <tr>
+    <th><label for="Amount">Amount</label></th>
+    <th>From Currency</th>
+    <th>To Currency</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td><input type="text" id="Amount"></td>
+    <td>
+      <label for="FromCurrency"></label><select id="FromCurrency">
+        <option value="VND">VND</option>
+        <option value="USD">USD</option>
+      </select>
+    </td>
+    <td>
+      <label for="ToCurrency"></label><select id="ToCurrency">
+        <option value="VND">VND</option>
+        <option value="USD">USD</option>
+      </select>
+    </td>
+    <td>
+      <button type="button" style="background-color: skyblue" onclick="ChangeMoney()">Convert</button>
+    </td>
+  </tr>
+</table>
+<br>
+<p id="Result"></p>
+<script>
+  function ChangeMoney ( ) {
+    let amount = parseInt(document.getElementById("Amount").value);
+    let toCurrency = document.getElementById("ToCurrency").value;
+    let fromCurrency = document.getElementById("FromCurrency").value;
+    let rate = 23000
+    let result
+
+    if (fromCurrency === 'VND' && toCurrency === 'USD') {
+      result = amount / rate;
+    } else if (fromCurrency === 'USD' && toCurrency === 'VND') {
+      result = amount * rate;
+    } else {
+      result = amount;
+    }
+    document.getElementById("Result").innerHTML = result;
+  }
+</script>
+</body>
+</html>
