@@ -16,8 +16,8 @@ let width =20
   let area = width*height
   document.write('area='+area+)
 
-let a = (prompt("Nhập số a"))
-let b = (prompt('Nhập số b'))
+let a = parseInt(prompt("Nhập số a"))
+let b = parseInt(prompt('Nhập số b'))
 
 if (b===0){
   alert('Không thể chia cho 0 ')
@@ -30,6 +30,7 @@ else{
     alert(a+'không là bội số của b')
   }
 }
+
 
 
 
