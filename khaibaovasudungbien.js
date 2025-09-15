@@ -1,13 +1,13 @@
 let i = 10
 let f =20.5
-let b = true
+let t = true
 let s = 'Ha Noi'
 
 document.write('i='+i)
 document.write('<br>')
 document.write('f='+f)
 document.write('<br>')
-document.write('b='+b)
+document.write('t='+t)
 document.write('<br>')
 document.write('s='+s)
 
@@ -24,12 +24,13 @@ if (b===0){
 }
 else{
   if (a%b === 0) {
-    alert(a+'là bội số của b')
+    alert(a+'là bội số của'+ b')
   }
   else{
-    alert(a+'không là bội số của b')
+    alert(a+'không là bội số của'+ b')
   }
 }
+
 
 
 
