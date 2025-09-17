@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      #Nobita {
+          position: relative; /* cần để di chuyển */
+          left: 0;
+          top: 0;
+      }
+  </style>
+</head>
+<body >
+<img id="Nobita" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREa1Eps3PDBtNRMW42BTXb4YIk5ulbu9MubQ&s">
+<script>
+  function upArrowPressed() {
+    let element = document.getElementById("Nobita");
+    let top = parseInt(element.style.top) || 0;
+    element.style.top = (top - 10) + 'px';
+  }
+  function downArrowPressed() {
+    let element = document.getElementById("Nobita");
+    let top = parseInt(element.style.top) || 0;
+    element.style.top = (top + 10) + 'px';
+  }
+  function leftArrowPressed() {
+    let element = document.getElementById("Nobita");
+    let left = parseInt(element.style.left) || 0;
+    element.style.left = (left - 10) + 'px';
+  }
+  function rightArrowPressed() {
+    let element = document.getElementById("Nobita");
+    let left = parseInt(element.style.left) || 0;
+    element.style.left = (left + 10) + 'px';
+  }
+
+  function moveSelection(evt) {
+    switch (evt.keyCode) {
+      case 37: leftArrowPressed(); break; // ←
+      case 39: rightArrowPressed(); break; // →
+      case 38: upArrowPressed(); break; // ↑
+      case 40: downArrowPressed(); break; // ↓
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    window.addEventListener('keydown', moveSelection);
+  });
+</script>
+</body>
+</html>
