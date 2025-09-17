@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form>
+  <img id="MyImage" src="https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/f9454a20bdea41968ae66e3b2583ae7a_9366/Qua_Bong_UCL_Pro_Vong_Bang_Mua_Giai_25-26_trang_JD0188_HM1.jpg" width="200" height="200">
+  <p>Click button below to move the image to right</p>
+  <input type="button" value="Click Me" onclick="moveRight()">
+</form>
+<script>
+  let football=null
+  football=document.getElementById("MyImage");
+  function init(){
+    football=document.getElementById("MyImage");
+    football.style.position="relative";
+    football.style.left = "0px";
+  }
+  function moveRight(){
+    football.style.left = parseInt(football.style.left) + 20 +"px";
+  }
+  window.onload=init
+</script>
+</body>
+</html>
