@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Puzzle Click Game</title>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          text-align: center;
+          margin-top: 40px;
+      }
+      #puzzle {
+          width: 600px;
+          height: 600px;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          grid-template-rows: repeat(3, 1fr);
+          gap: 1px;
+          margin: auto;
+          border: 4px solid #333;
+      }
+      .piece {
+          width: 200px;
+          height: 200px;
+          background-image: url(https://static.bongda24h.vn/medias/standard/2022/2/25/champions-league.png); /* đổi link ảnh tại đây */
+          background-size: 600px 600px;
+          cursor: pointer;
+      }
+      #puzzle.win {
+          border: 4px solid red; /* báo đúng */
+      }
+  </style>
+</head>
+<body>
+<h2>Puzzle Game (Click để đổi mảnh)</h2>
+<div id="puzzle"></div>
+
+<script>
+  const puzzle = document.getElementById("puzzle");
+  const size = 3;
+  const pieceSize = 100;
+  const positions = [];
+
+  // Tạo danh sách 9 mảnh (tọa độ đúng)
+  for (let r = 0; r < size; r++) {
+    for (let c = 0; c < size; c++) {
+      positions.push({ row: r, col: c });
+    }
+  }
+
+  // Hàm tạo 1 mảnh DOM
+  function createPiece(row, col) {
+    const div = document.createElement("div");
+    div.classList.add("piece");
+    div.dataset.correctRow = row;
+    div.dataset.correctCol = col;
+
+    // chọn random mảnh ban đầu
+    setRandomBackground(div);
+
+    div.addEventListener("click", () => {
+      setRandomBackground(div);
+      checkWin();
+    });
+
+    return div;
+  }
+
+  // Gán background cho 1 mảnh ngẫu nhiên trong 9 mảnh
+  function setRandomBackground(div) {
+    const rand = positions[Math.floor(Math.random() * positions.length)];
+    div.dataset.currentRow = rand.row;
+    div.dataset.currentCol = rand.col;
+    div.style.backgroundPosition = `-${rand.col * pieceSize}px -${rand.row * pieceSize}px`;
+  }
+
+  // Kiểm tra thắng
+  function checkWin() {
+    const allPieces = document.querySelectorAll(".piece");
+    const win = Array.from(allPieces).every(p =>
+      parseInt(p.dataset.currentRow) === parseInt(p.dataset.correctRow) &&
+      parseInt(p.dataset.currentCol) === parseInt(p.dataset.correctCol)
+    );
+    if (win) {
+      puzzle.classList.add("win");
+    } else {
+      puzzle.classList.remove("win");
+    }
+  }
+
+  // Render puzzle
+  positions.forEach(pos => {
+    const piece = createPiece(pos.row, pos.col);
+    puzzle.appendChild(piece);
+  });
+</script>
+</body>
+</html>
