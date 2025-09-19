@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      table {
+          border-collapse: collapse;
+          margin: 20px auto;
+      }
+      td {
+          border: 1px solid black;
+          padding: 5px 10px;
+          text-align: center;
+      }
+  </style>
+</head>
+<body>
+<table>
+<script>
+  // vòng lặp hàng (từ 1 đến 9)
+  for (let i = 1; i <= 9; i++) {
+    document.write("<tr>");
+    // vòng lặp cột (từ 2 đến 9)
+    for (let j = 2; j <= 9; j++) {
+      document.write("<td>" + j + "x" + i + "=" + (j * i) + "</td>");
+    }
+    document.write("</tr>");
+  }
+</script>
+</table>
+</body>
+</html>
