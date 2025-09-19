@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<p id="result"></p>
+<script>
+  let sohang=parseInt(prompt('Nhập n số nguyên tố'))
+  let count=0
+  let n=2
+  let result =''
+  function isPrime(n) {
+    let i = 2;
+    while (i <= Math.sqrt(n)) {
+      if (n % i === 0) return false;
+      i++;
+    }
+    return true;
+  }
+  while (count < sohang) {
+    if (isPrime(n)) {
+      result += n +'<br>';
+      count++;
+    }
+    n++;
+  }
+  document.getElementById("result").innerHTML = result;
+</script>
+</body>
+</html>
