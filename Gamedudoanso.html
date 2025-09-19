@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<button onClick="GameStart()">Bắt đầu chơi</button>
+<script>
+  function GameStart() {
+    let max = parseInt(prompt(" Nhập khoảng tối đa :"));
+    if (isNaN(max) || max <= 1) {
+      alert("Vui lòng nhập số lớn hơn 1");
+      return;
+    }
+    let dudoanmay = Math.floor(Math.random() * max) + 1;
+    let gioihan = 3;
+    let luot = 0;
+
+    while (luot < gioihan) {
+      let dudoannguoi = parseInt(prompt("Nhập số bạn đoán (Lượt " + (luot + 1) + "/" + gioihan + "):"));
+      luot++;
+      if (dudoannguoi === dudoanmay) {
+        alert(" Chúc mừng! Bạn đã đoán đúng số " + dudoanmay);
+        return;
+      } else if (dudoannguoi > dudoanmay) {
+        alert(" Sai! Máy chọn số nhỏ hơn.");
+      } else {
+        alert(" Sai! Máy chọn số lớn hơn.");
+      }
+    }
+    alert(" Hết 3 lượt! Bạn đã thua. Máy chọn số: " + dudoanmay);
+  }
+</script>
+</body>
+</html>
