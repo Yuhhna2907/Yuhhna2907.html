@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<label for="change"><input type="text" id="change" placeholder="Nhập từ cần tra"></label>
+<button type="button" onclick="ChangeLanguage();">Translate</button>
+<p id="result"></p>
+<script>
+  function ChangeLanguage(){
+    let array1=["hello", "dog", "cat", "computer", "car", "school", "book"];
+    let array2=["xin chào", "chó", "mèo", "máy tính", "xe hơi", "trường học", "sách"];
+    let word=document.getElementById("change").value.toLowerCase();
+    let index1=array1.indexOf(word);
+    let index2=array2.indexOf(word);
+    if(index1!==-1){
+      document.getElementById("result").innerHTML= word+"="+ array2[index1];
+    }else if(index2!==-1){
+      document.getElementById("result").innerHTML= word+"="+ array1[index2];
+    }else
+      document.getElementById("result").innerHTML='Không tìm thấy từ '+word+' trong từ điển';
+  }
+</script>
+</body>
+</html>
