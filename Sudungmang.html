@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  //1.
+  //let mycolor =["red", "green", "white","black"];
+  //let result = mycolor.join();
+  //console.log(result);
+
+  //2.
+  //let num=prompt('Enter your number');
+  //let array1=num.split('');
+  //for (let i = 0; i < array1.length-1; i++) {
+    //if (parseInt(array1[i])%2===0&&parseInt(array1[i+1])%2===0) {
+      //array1[i]=array1[i]+"-";
+    //}
+  //}
+  //let array2=array1.join("")
+  //document.write(array2)
+
+  //3.
+  let chu=prompt("Nhập vào chuỗi: ");
+  let arrs=chu.split("");
+  let resultarray=arrs.map(chu => {
+    if(chu>='a'&&chu<='z'){
+      return chu.toUpperCase()
+    }else if (chu>='A'&&chu<='Z'){
+      return chu.toLowerCase()
+    }
+  else {
+    return chu
+  }
+  });
+  let result=resultarray.join("");
+  document.write(result);
+  </script>
+</body>
+</html>
