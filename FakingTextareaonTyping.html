@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h1>Type anything slowly</h1>
+<textarea id="change" rows="10" cols="50" onkeydown="typeTextarea(event);"></textarea>
+<script>
+  const fixedText = "TÔI LÀ MỘT THẰNG NGU NGỐC !!";
+  let index = 0;
+  function typeTextarea(e) {
+    e.preventDefault();
+    const textarea = document.getElementById("change");
+    if (index < fixedText.length) {
+      textarea.value += fixedText[index];
+      index++;
+    } else {
+      setTimeout(() => {
+        textarea.value = "";
+        index = 0;
+      }, 1000);
+    }
+  }
+</script>
+</body>
+</html>
