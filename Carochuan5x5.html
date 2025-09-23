@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h3>Caro Game Simple (5x5)</h3>
+<p id="carogame"></p>
+<input type="button" value="Đánh cờ" onclick="changeValue()">
+<script>
+  let size = 5;
+  let board = [];
+  let currentPlayer = "X";
+  for (let i = 0; i < size; i++) {
+    board[i] = [];
+    for (let j = 0; j < size; j++) {
+      board[i][j] = "o";
+    }
+  }
+  function renderBoard() {
+    let data = "";
+    for (let i = 0; i < size; i++) {
+      data += "<br/>";
+      for (let j = 0; j < size; j++) {
+        data += board[i][j] + "&nbsp;&nbsp;&nbsp;";
+      }
+    }
+    document.getElementById("carogame").innerHTML = data;
+  }
+  renderBoard();
+  function changeValue() {
+    let positionX = parseInt(prompt("Nhập X (0-" + (size - 1) + "):"));
+    let positionY = parseInt(prompt("Nhập Y (0-" + (size - 1) + "):"));
+
+    if (
+      isNaN(positionX) || isNaN(positionY) ||
+      positionX < 0 || positionX >= size ||
+      positionY < 0 || positionY >= size
+    ) {
+      alert("Tọa độ không hợp lệ!");
+      return;
+    }
+    if (board[positionX][positionY] !== "o") {
+      alert("Ô này đã có người đánh!");
+      return;
+    }
+    board[positionX][positionY] = currentPlayer;
+    renderBoard();
+    if (checkWin(positionX, positionY)) {
+      alert(" Người chơi " + currentPlayer + " thắng!");
+      return;
+    }
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+  }
+  function checkWin(x, y) {
+    return (
+      checkDirection(x, y, 1, 0) || // hàng ngang
+      checkDirection(x, y, 0, 1) || // hàng dọc
+      checkDirection(x, y, 1, 1) || // chéo chính
+      checkDirection(x, y, 1, -1)   // chéo phụ
+    );
+  }
+  function checkDirection(x, y, dx, dy) {
+    let count = 1;
+    let i = x + dx, j = y + dy;
+    while (i >= 0 && i < size && j >= 0 && j < size && board[i][j] === currentPlayer) {
+      count++;
+      i += dx; j += dy;
+    }
+    i = x - dx; j = y - dy;
+    while (i >= 0 && i < size && j >= 0 && j < size && board[i][j] === currentPlayer) {
+      count++;
+      i -= dx; j -= dy;
+    }
+    return count >= 3;
+  }
+</script>
+</body>
+</html>
