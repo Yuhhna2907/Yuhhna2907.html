@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+      }
+      h3 {
+          margin-bottom: 10px;
+      }
+      input[type="text"] {
+          padding: 8px 10px;
+          width: 200px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+      }
+      button {
+          padding: 8px 15px;
+          margin-left: 5px;
+          background-color: #28a745;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+      }
+      button:hover {
+          background-color: #218838;
+      }
+      table {
+          margin-top: 20px;
+          border-collapse: collapse;
+          width: 60%;
+      }
+      th, td {
+          border: 1px solid #ddd;
+          padding: 8px;
+          text-align: center;
+      }
+      th {
+          background: #f2f2f2;
+      }
+      #productBody tr:nth-child(even) {
+          background-color: #f9f9f9;
+      }
+  </style>
+</head>
+<body>
+<h2>Add New Product</h2>
+<input type="text" id="productInput" placeholder="New Product">
+<button onclick="addProduct()">Add</button>
+<h2>Display All Products</h2>
+<table id="productTable">
+  <thead>
+  <tr>
+    <th>STT</th>
+    <th>Product Name</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody id="productBody"></tbody>
+</table>
+<script>
+  let products = ["Sony Xperia",
+    "Samsung Galaxy",
+    "Nokia 6",
+    "Xiaomi Redmi Note 4",
+    "Apple iPhone 6S",
+    "Xiaomi Mi 5s Plus",
+    "Apple iPhone 8 Plus",
+    "Fujitsu F-04E",
+    "Oppo A71"];
+  function renderProducts() {
+    const tbody = document.getElementById("productBody");
+    tbody.innerHTML = "";
+    for (let i = 0; i < products.length; i++) {
+      const row = document.createElement("tr");
+      const sttCell = document.createElement("td");
+      sttCell.textContent = i + 1;
+      row.appendChild(sttCell);
+      const nameCell = document.createElement("td");
+      nameCell.textContent = products[i];
+      row.appendChild(nameCell);
+      const actionCell = document.createElement("td");
+      const editBtn = document.createElement("button");
+      editBtn.textContent = "Edit";
+      editBtn.onclick = function () {
+        editProduct(i);
+      };
+      actionCell.appendChild(editBtn);
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Delete";
+      deleteBtn.onclick = function () {
+        deleteProduct(i);
+      };
+      actionCell.appendChild(deleteBtn);
+      row.appendChild(actionCell);
+      tbody.appendChild(row);
+    }
+  }
+  function addProduct() {
+    const input = document.getElementById("productInput");
+    const productName = input.value.trim();
+    if (productName === "") {
+      alert("Vui lòng nhập tên sản phẩm!");
+      return;
+    }
+    products.push(productName);
+    renderProducts();
+    input.value = "";
+    input.focus();
+  }
+  function editProduct(index) {
+    const newName = prompt("Nhập tên mới cho sản phẩm:", products[index]);
+    if (newName && newName.trim() !== "") {
+      products[index] = newName.trim();
+      renderProducts();
+    }
+  }
+  function deleteProduct(index) {
+    products.splice(index, 1);
+    renderProducts();
+  }
+</script>
+</body>
+</html>
