@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h2>Chuyển đổi nhiệt độ</h2>
+<label for="celsius">Nhập nhiệt độ (°C): </label>
+<input type="number" id="celsius" value="25">
+<button onclick="convertTemp()">Chuyển đổi</button>
+<p id="result"></p>
+<script>
+  function Temperature(celsius){
+    this.celsius=celsius;
+    this.toFahrenheit=function(){
+      return (this.celsius*9/5)+32
+    }
+    this.toKelvin=function(){
+      return this.celsius+273.15
+    }
+  }
+  function convertTemp(){
+    let celsiusValue=parseFloat(document.getElementById("celsius").value);
+    if (celsiusValue< -273.15){
+      document.getElementById("result").innerHTML= "Nhiêt độ không hợp lệ"
+      return
+    }
+    let temp=new Temperature(celsiusValue);
+    let f=temp.toFahrenheit();
+    let k=temp.toKelvin()
+    document.getElementById("result").innerHTML =
+      celsiusValue + "°C = " + f.toFixed(2) + "°F<br>" +
+      celsiusValue + "°C = " + k.toFixed(2) + "K";
+  }
+</script>
+</body>
+</html>
