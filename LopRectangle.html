@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<canvas id="myCanvas" width="300" height="200" style="border:1px solid black"></canvas>
+<p id="result"></p>
+<script>
+  function Rectangle(width,height) {
+    this.width = width;
+    this.height = height;
+    this.getWidth = function() {
+      return this.width;
+    };
+    this.getHeight = function() {
+      return this.height;
+    }
+    this.setHeight = function(height) {
+      this.height = height;
+    }
+    this.setWidth = function(width) {
+      this.width = width;
+    }
+    this.getArea = function() {
+      return this.height*this.width;
+    }
+    this.getPerimeter = function() {
+      return (this.height+this.width)*2
+    }
+  }
+let myRectangle=new Rectangle(200,100);
+  let width=myRectangle.getWidth();
+  let height=myRectangle.getHeight();
+  myRectangle.setWidth(width);
+  myRectangle.setHeight(height);
+  let area=myRectangle.getArea();
+  let perimeter=myRectangle.getPerimeter();
+
+  document.getElementById('result').innerHTML = ("perimeter: " + perimeter + " area: " + area );
+
+  let rectangle=document.getElementById("myCanvas");
+  let ctx=rectangle.getContext("2d");
+  ctx.beginPath();
+  ctx.fillStyle="lightblue";
+  ctx.fillRect(10,10,width,height);
+  ctx.strokeRect(10,10,width,height);
+</script>
+</body>
+</html>
