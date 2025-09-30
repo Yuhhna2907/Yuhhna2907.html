@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function Mobile(name){
+    this.name = name;
+    this.battery=100
+    this.isOn=false
+    this.draftMessage=''
+    this.inbox=[]
+    this.sent=[]
+    this.checkStatus=function(){
+      return this.isOn
+    }
+    this.turnOn=function(){
+      this.isOn=true
+    }
+    this.turnOff=function(){
+      this.isOn=false
+    }
+    this.charge=function(){
+      this.battery=100
+    }
+    this.writeMessage=function(msg){
+      if(this.isOn&&this.battery>0){
+        this.draftMessage=msg
+        this.battery--
+      }
+    }
+    this.sendMessage=function(toMobile){
+      if(this.isOn&&this.battery>0&&this.draftMessage!==""){
+        toMobile.receiveMessage(this.draftMessage,this.name)
+        this.sent.push(this.draftMessage)
+        this.draftMessage=""
+        this.battery--
+      }
+    }
+    this.receiveMessage=function(msg,from){
+      if(this.isOn){
+        this.inbox.push("From "+from+": "+msg)
+      }
+    }
+    this.showInbox=function(){
+      if(this.isOn){
+        return this.inbox
+      }
+      return "Điện thoại đang tắt!"
+    }
+    this.showSent=function(){
+      if(this.isOn){
+        return this.sent
+      }
+      return "Điện thoại đang tắt!"
+    }
+  }
+  let nokia=new Mobile("Nokia")
+  let iphone=new Mobile("Iphone")
+  nokia.turnOn()
+  iphone.turnOn()
+
+  nokia.writeMessage("Hello cậu mình là Nokia đây")
+  nokia.sendMessage(iphone)
+
+  document.write("<h2>Inbox Iphone</h2>")
+  document.write(iphone.showInbox())
+
+  document.write("<h2>Sent Nokia</h2>")
+  document.write(nokia.showSent())
+</script>
+</body>
+</html>
