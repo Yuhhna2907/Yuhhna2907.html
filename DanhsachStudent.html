@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      table {
+          width: 60%;
+          border-collapse: collapse;
+          margin: 20px auto;
+          font-family: Arial, sans-serif;
+          font-size: 16px;
+          text-align: center;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      }
+      th, td {
+          padding: 10px 15px;
+          border: 1px solid #ddd;
+      }
+      th {
+          background-color: #4CAF50;
+          color: white;
+          text-transform: uppercase;
+      }
+      tr:nth-child(even) {
+          background-color: #f9f9f9;
+      }
+      tr:hover {
+          background-color: #f1f1f1;
+          cursor: pointer;
+      }
+  </style>
+</head>
+<body>
+<div id="studentTable"></div>
+<script>
+  class Student {
+    constructor(name,age,studentId){
+      this.name=name
+      this.age=age
+      this.studentId=studentId
+    }
+      getName(){
+        return this.name;
+      }
+      setName(name) {
+        this.name = name;
+      }
+      getAge() {
+        return this.age;
+      }
+      setAge(age) {
+        this.age = age;
+      }
+      getStudentId() {
+        return this.studentId;
+      }
+      setStudentId(studentId) {
+        this.studentId = studentId;
+      }
+      displayInfo() {
+        console.log(`Name: ${this.name}, Age: ${this.age}, Student ID: ${this.studentId}`);
+      }
+  }
+  let student1 = new Student("Lương Anh Huy",21,"SV001");
+  let student2 = new Student("Vũ Ngọc Duy",22,"SV002");
+  let student3 = new Student("Nguyễn Hoàng Tuấn Anh",18,"SV003");
+
+  function renderStudentTable(studentList) {
+    let html = "<table>";
+    html += "<tr><th>Mã SV</th><th>Họ Tên</th><th>Tuổi</th></tr>";
+
+    for (let student of studentList) {
+      html += `<tr>
+                        <td>${student.studentId}</td>
+                        <td>${student.name}</td>
+                        <td>${student.age}</td>
+                     </tr>`;
+    }
+
+    html += "</table>";
+    document.getElementById("studentTable").innerHTML = html;
+  }
+  let students = [student1, student2, student3];
+  renderStudentTable(students);
+</script>
+</body>
+</html>
