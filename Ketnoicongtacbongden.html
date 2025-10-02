@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function ElectricLamp() {
+    this.status = false;
+    this.turnOn=function(){
+      this.status=true;
+      console.log("Đèn sáng")
+    }
+    this.turnOff=function(){
+      this.status=false;
+      console.log("Đèn tắt")
+    }
+    this.getStatus=function(){
+      return this.status;
+    }
+  }
+  function SwitchButton (){
+    this.status=false;
+    this.lamp=null
+    this.connectToLamp=function(lamp){
+      this.lamp=lamp;
+      console.log('Công tắc đã kết nối với đèn');
+    }
+    this.switchOn=function(){
+      if(this.lamp){
+        this.status=true;
+        this.lamp.turnOn()
+      }else {
+        console.log("Chưa kết nối với đèn!")
+      }
+    }
+    this.switchOff=function(){
+      if(this.lamp){
+        this.status=false;
+        this.lamp.turnOff()
+      }else{
+        console.log("Chưa kết nối với đèn!")
+      }
+    }
+  }
+  let lamp = new ElectricLamp();
+  let switchButton = new SwitchButton();
+  switchButton.connectToLamp(lamp);
+
+  for(let i=1;i<= 10;i++ ){
+    console.log(i);
+    switchButton.switchOn();
+    switchButton.switchOff();
+  }
+</script>
+</body>
+</html>
