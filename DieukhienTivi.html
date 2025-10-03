@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function TV(channel,volume){
+    this.channel = channel || 1;
+    this.volume = volume || 10;
+    this.isOn=false
+    this.changeChannel= function(newChannel){
+      if(this.isOn){
+        this.channel=newChannel;
+        console.log("Đã chuyển sang kênh " + newChannel);
+      }else {
+        console.log("TiVi đang tắt, không thể chuyển kênh.")
+      }
+    }
+    this.changeVolume=function(newVolume){
+        if(this.isOn){
+          this.volume=newVolume;
+          console.log("Âm lượng hiện tại: " + newVolume);
+        }else{
+          console.log("TiVi đang tắt, không thể chỉnh âm lượng.")
+        }
+
+    }
+    this.turnOn=function(){
+        this.isOn = true;
+        console.log("Tivi đang bật")
+    }
+    this.turnOff=function(){
+        this.isOn = false;
+        console.log("Tivi đang tắt")
+    }
+  }
+  function Remote(Id,tv){
+    this.Id=Id;
+    this.tv=tv
+    this.changeChannel= function(newChannel){
+      if(this.tv.isOn){
+        this.tv.channel=newChannel;
+        console.log("Remote " + this.Id + " đã chuyển kênh sang " + newChannel);
+      }else {
+        console.log("TiVi đang tắt, không thể đổi kênh!");
+      }
+    }
+    this.changeVolume=function(newVolume){
+      if(this.tv.isOn){
+        this.tv.channel=newVolume;
+        console.log("Remote " + this.code + " đã chỉnh âm lượng thành " + newVolume)
+      } else
+        console.log("TiVi đang tắt, không thể chỉnh âm lượng!");
+    }
+  }
+  let tv=new TV(1,10)
+  let remote=new Remote('RM01',tv)
+  tv.turnOn()
+  tv.changeChannel(7)
+  remote.changeChannel(3)
+  tv.changeVolume(tv.volume+2)
+  tv.turnOff()
+</script>
+</body>
+</html>
