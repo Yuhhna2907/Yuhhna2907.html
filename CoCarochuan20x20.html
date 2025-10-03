@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      table {
+          border-collapse: collapse;
+      }
+      td {
+          width: 25px;
+          height: 25px;
+          border: 1px solid blue;
+          text-align: center;
+          vertical-align: middle;
+          font-size: 20px;
+          font-weight: bold;
+          cursor: pointer;
+      }
+  </style>
+</head>
+<body>
+<h2>Bàn cờ 20x20</h2>
+<button onclick="startGame()">Start</button>
+<div id="board"></div>
+<script>
+  const rows = 20;
+  const cols = 20;
+  let boardArray = [];
+  let gameOver = false;
+  let currentPlayer = "X";
+
+  function startGame() {
+    let html="<table>"
+    boardArray=[]
+    for (let i = 0; i < rows; i++) {
+      html+="<tr>"
+      boardArray[i] = [];
+      for (let j = 0; j < cols; j++) {
+        html += `<td onclick="cellClick(${i},${j}, this)"></td>`;
+        boardArray[i][j] = ""
+      }
+      html+="</tr>"
+    }
+    html+="</table>"
+    document.getElementById("board").innerHTML = html;
+  }
+
+  function cellClick(r,c,cell){
+    if(gameOver) return
+    if(boardArray[r][c]===''){
+      boardArray[r][c]=currentPlayer;
+      cell.innerText=currentPlayer;
+    }
+    if(checkWin(r,c)){
+      alert(`Người chơi ${currentPlayer} thắng!`)
+      gameOver = true;
+      return;
+    }
+    currentPlayer = (currentPlayer==='X') ? "O" : "X";
+  }
+
+  function checkWin(r,c){
+    const directions=[
+      {dr:0,dc:1},
+      {dr:1,dc:0},
+      {dr:1,dc:1},
+      {dr:1,dc:-1},
+    ]
+    for (let{dr,dc} of directions){
+      let count=1
+      let i= r+dr,j=c+dc
+      while (isValid(i, j) && boardArray[i][j] === currentPlayer) {
+        count++;
+        i += dr; j += dc;
+      }
+      i=r-dr;j=c-dc
+      while (isValid(i, j) && boardArray[i][j] === currentPlayer) {
+        count++;
+        i -= dr; j -= dc;
+      }
+      if(count===5) return true
+    }
+    return false;
+  }
+
+  function isValid(r,c){
+    return r >= 0 && r < rows && c >= 0 && c < cols;
+  }
+</script>
+</body>
+</html>
