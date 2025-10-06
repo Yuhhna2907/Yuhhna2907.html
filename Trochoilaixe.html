@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<canvas id="GameLaixeCanva" width="800" height="400" style="border: 1px solid black"></canvas>
+<script>
+  let canvas = document.getElementById('GameLaixeCanva');
+  let ctx = canvas.getContext('2d');
+  let gameOver = false;
+  let score = 0
+  function Car(x, y, width, height, imgSrc, speed) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.speed = speed;
+    this.baseSpeed = speed;
+    this.boostSpeed = speed*3;
+    this.direction= 'up'
+
+    this.img = new Image();
+    this.img.src = imgSrc;
+    this.draw = () => {
+      ctx.save();
+      ctx.translate(this.x + this.width / 2, this.y + this.height / 2);
+      let angle = 0;
+      if (this.direction === "up") {angle = 0}
+      if (this.direction === "down") {angle = Math.PI}
+      if (this.direction === "left") {angle = -Math.PI / 2}
+      if (this.direction === "right") {angle = Math.PI / 2}
+      ctx.rotate(angle);
+      ctx.drawImage(this.img, -this.width/2, -this.height/2, this.width, this.height);
+      ctx.restore();
+    };
+    this.move = () => {
+     switch (this.direction) {
+       case'up':
+         this.y -= this.speed;
+         break;
+       case "down":
+         this.y += this.speed;
+         break;
+       case "left":
+         this.x -= this.speed;
+         break;
+       case "right":
+         this.x += this.speed;
+         break;
+     }
+    };
+  }
+  function Obstacle(x, y, width, height, color){
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.color = color;
+    this.draw = () => {
+      ctx.fillStyle = this.color;
+      ctx.fillRect(this.x, this.y, this.width, this.height);
+    };
+  }
+  function Reward(x, y, size, color) {
+    this.x = x;
+    this.y = y;
+    this.width = size;
+    this.height = size;
+    this.color = color;
+
+    this.draw = () => {
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(this.x + this.width / 2, this.y + this.height / 2, this.width / 2, 0, Math.PI * 2);
+      ctx.fill();
+    };
+  }
+  function checkCollision(a, b) {
+    return (
+      a.x < b.x + b.width &&
+      a.x + a.width > b.x &&
+      a.y < b.y + b.height &&
+      a.y + a.height > b.y
+    );
+  }
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min
+  }
+  let obstacles = [];
+  let rewards = [];
+
+  for (let i = 0; i < 5; i++) {
+    obstacles.push(new Obstacle(getRandomInt(50, 600), getRandomInt(50, 400), 60, 60, "red"));
+  }
+  for (let i = 0; i < 20; i++) {
+    rewards.push(new Reward(getRandomInt(50, 600), getRandomInt(50, 400), 30, "gold"));
+  }
+  let car = new Car(
+    200, 300, 120, 60,
+    "car.png",
+    2
+  );
+
+  function update() {
+    if (gameOver) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    car.move();
+    car.draw();
+    obstacles.forEach(ob => ob.draw());
+    rewards.forEach(re => re.draw())
+    for (let ob of obstacles) {
+      if (checkCollision(car, ob))  {
+      gameOver = true;
+      alert(" Game Over!")
+      }
+    }
+    for (let i = rewards.length - 1; i >= 0; i--) {
+      if (checkCollision(car, rewards[i])) {
+        score++;
+        console.log( "Điểm:", score);
+        rewards.splice(i, 1);
+      }
+    }
+    ctx.fillStyle = "black";
+    ctx.font = "20px Arial";
+    ctx.fillText("Score: " + score, 20, 20);
+    requestAnimationFrame(update);
+  }
+
+  car.img.onload = () => {
+    update();
+  }
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowUp") car.direction = "up";
+    if (e.key === "ArrowDown") car.direction = "down";
+    if (e.key === "ArrowLeft") car.direction = "left";
+    if (e.key === "ArrowRight") car.direction = "right";
+    if (e.ctrlKey) {
+      car.speed = car.boostSpeed;
+    }
+  });
+
+  document.addEventListener("keyup", (e) => {
+    if (e.key === "Control") {
+      car.speed = car.baseSpeed;
+    }
+  })
+
+</script>
+</body>
+</html>
