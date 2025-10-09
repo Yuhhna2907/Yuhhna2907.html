@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+          margin: 30px;
+          background-color: #f9f9f9;
+      }
+
+      h2 {
+          color: #2c3e50;
+      }
+
+      button {
+          background-color: #3498db;
+          color: white;
+          border: none;
+          padding: 10px 16px;
+          margin-right: 10px;
+          border-radius: 6px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+      }
+
+      button:hover {
+          background-color: #2980b9;
+      }
+
+      table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 20px;
+          background: white;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      }
+
+      th, td {
+          border: 1px solid #ddd;
+          padding: 10px;
+          text-align: center;
+      }
+
+      th {
+          background-color: #3498db;
+          color: white;
+      }
+
+      tr:nth-child(even) {
+          background-color: #f2f2f2;
+      }
+
+      tr:hover {
+          background-color: #d6eaf8;
+      }
+  </style>
+</head>
+<body>
+<button onclick="showDanhSach()">Hiển thị danh sách</button>
+<button onclick="themDienThoai()">Thêm điện thoại mới</button>
+<p id="result"></p>
+<script>
+  class DienThoai {
+    constructor(id,name,model,price) {
+      this._id = id;
+      this._name = name;
+      this._model = model;
+      this._price = price;
+    }
+
+    get id() {
+      return this._id;
+    }
+    set id(value) {
+      this._id = value;
+    }
+    get name() {
+      return this._name;
+    }
+    set name(value) {
+      this._name = value;
+    }
+    get model() {
+      return this._model;
+    }
+    set model(value) {
+      this._model = value;
+    }
+
+    get price() {
+      return this._price;
+    }
+    set price(value) {
+      this._price = value;
+    }
+
+    // Phương thức toString()
+    toString() {
+      return `Mã: ${this._id} | Tên: ${this._name} | Hãng: ${this._model} | Giá: ${this._price.toLocaleString()} VND`;
+    }
+  }
+  let danhSach = [
+    new DienThoai("DT01", "iPhone 17 Pro Max", "Apple", 35000000),
+    new DienThoai("DT02", "Galaxy S25 Ultra", "Samsung", 28000000),
+    new DienThoai("DT03", "Xiaomi 15 5G", "Xiaomi", 21000000),
+    new DienThoai("DT04", "Oppo Reno 14 Pro 5G", "Oppo", 13000000)
+  ];
+  function showDanhSach() {
+    for (let i = 0; i < danhSach.length - 1; i++) {
+      for (let j = 0; j < danhSach.length - i - 1; j++) {
+        if (danhSach[j].name.toLowerCase() > danhSach[j + 1].name.toLowerCase()) {
+          let temp = danhSach[j];
+          danhSach[j] = danhSach[j + 1];
+          danhSach[j + 1] = temp;
+        }
+      }
+    }
+    let html = `
+        <table>
+          <thead>
+            <tr>
+              <th>Mã điện thoại</th>
+              <th>Tên</th>
+              <th>Hãng sản xuất</th>
+              <th>Giá (VNĐ)</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+    for (let dt of danhSach) {
+      html += `
+          <tr>
+            <td>${dt.id}</td>
+            <td>${dt.name}</td>
+            <td>${dt.model}</td>
+            <td>${dt.price.toLocaleString()}</td>
+          </tr>
+        `;
+    }
+    html += `</tbody></table>`;
+    document.getElementById("result").innerHTML = html;
+  }
+  function themDienThoai() {
+    let id = prompt("Nhập mã điện thoại:");
+    let name = prompt("Nhập tên điện thoại:");
+    let model = prompt("Nhập hãng sản xuất:");
+    let price = parseFloat(prompt("Nhập giá điện thoại (VNĐ):"));
+
+    if (!id || !name || !model || isNaN(price)) {
+      alert("Dữ liệu không hợp lệ. Vui lòng nhập lại!");
+      return;
+    }
+
+    let dtMoi = new DienThoai(id, name, model, price);
+    danhSach.push(dtMoi);
+
+    alert(" Đã thêm điện thoại mới!");
+    showDanhSach();
+  }
+</script>
+</body>
+</html>

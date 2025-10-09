@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function countUppercase(str) {
+    let count = 0;
+    for (let i = 0; i < str.length; i++) {
+      let char = str[i];
+      if(char >='A'&&char <='Z') {
+        count++;
+      }
+    }
+    if(count>0){
+      return count;
+    }else {
+      return 'The String is not contain upper char';
+    }
+  }
+  let text1=countUppercase('ABcDEf');
+  let text2=countUppercase('abcdef');
+  console.log(text1);
+  console.log(text2);
+</script>
+</body>
+</html>

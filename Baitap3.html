@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function isPrime(number) {
+    if (number <= 1) {
+      return false;
+    }
+    for (let i = 2; i <= Math.sqrt(number); i++) {
+      if (number % i === 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+  function findPrime(array) {
+    let primes = [];
+    for (let i = 0; i < array.length; i++) {
+      if(isPrime(array[i])) {
+        primes.push(array[i]);
+      }
+    }
+    for (let i = 0; i < primes.length - 1; i++) {
+      for (let j = 0; j < primes.length - i - 1; j++) {
+        if (primes[j] > primes[j + 1]) {
+          let temp = primes[j];
+          primes[j] = primes[j + 1];
+          primes[j + 1] = temp;
+        }
+      }
+    }
+    return primes;
+  }
+  let numbers = [1, 5, 7, 23, 8, 47, 10, 3, 31,19];
+  let result = findPrime(numbers);
+
+  console.log("Mảng ban đầu:", numbers);
+  console.log("Các số nguyên tố (tăng dần):", result);
+</script>
+</body>
+</html>
