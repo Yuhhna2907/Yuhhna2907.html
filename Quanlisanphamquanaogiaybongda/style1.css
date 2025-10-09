@@ -1,0 +1,628 @@
+header {
+    position: relative;
+    background: url('https://www.arsenal.com/sites/default/files/2024-04/wallpaper_750x1334.png') center/cover no-repeat;
+    height: 280px; /* bạn có thể chỉnh cao hơn: 300–350px nếu muốn ảnh rõ hơn */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    color: white;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    border-radius: 0 0 16px 16px; /* bo nhẹ phần dưới cho mềm */
+}
+
+/* lớp phủ giúp chữ dễ đọc hơn */
+header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1;
+}
+
+header h1, header p {
+    position: relative;
+    z-index: 2;
+}
+
+header h1 {
+    font-size: 2.6rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+    color: #f9ca24;
+    text-shadow: 0 0 15px rgba(249,202,36,0.6);
+}
+
+header p {
+    font-size: 1.1rem;
+    color: #f1f1f1;
+    font-weight: 300;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 50px auto;
+    background: #111;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.form-section {
+    flex: 1;
+    background-color: #1c1c1c;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 0 10px rgba(255,255,255,0.05);
+    width: 100%;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+h2 {
+    text-align: center;
+    color: #f9ca24;
+    margin-bottom: 25px;
+}
+
+label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+}
+
+label span {
+    color: #f9ca24;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #222;
+    color: white;
+    margin-bottom: 15px;
+    transition: 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #1e90ff;
+    box-shadow: 0 0 8px #1e90ff;
+    outline: none;
+}
+
+.button-wrap {
+    text-align: center;
+    margin-top: 15px;
+}
+
+button {
+    background: linear-gradient(90deg, #1e90ff, #0072ff);
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 12px 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #1e90ff;
+}
+
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+    }
+}
+.size-btn {
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.size-btn:hover { background-color: #0056b3; }
+
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /* Hiệu ứng mờ nền (Overlay) */
+    background-color: rgba(0, 0, 0, 0.9); /* Nền cực tối để tạo sự tương phản */
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* =======================================
+   2. STYLE NỘI DUNG POPUP (KHUNG CHÍNH)
+   ======================================= */
+.popup-content {
+    background-color: #2E2E2E; /* Nền xám đậm, đồng bộ với dashboard */
+    margin: 8% auto; /* Đặt ở giữa màn hình */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.8);
+    border: 1px solid #FF9800; /* Viền cam nổi bật */
+    width: 90%;
+    max-width: 650px;
+    position: relative;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}
+
+/* Keyframes cho hiệu ứng trượt vào (giữ nguyên) */
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+/* =======================================
+   3. STYLE NÚT ĐÓNG VÀ TIÊU ĐỀ
+   ======================================= */
+.close {
+    color: #FF9800; /* Màu cam nổi bật */
+    float: right;
+    font-size: 36px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.close:hover,
+.close:focus {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.popup-content h2 {
+    color: #FF9800; /* Tiêu đề màu cam */
+    border-bottom: 2px solid #555;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 26px;
+    text-align: center;
+}
+.popup-content h3 {
+    color: #f4b400; /* Màu cam nổi bật */
+    font-size: 22px;
+    margin-top: 30px;
+    border-top: 1px solid #555;
+    padding-top: 15px;
+}
+
+/* =======================================
+   4. STYLE BẢNG SIZE (SIZE CHART)
+   ======================================= */
+.size-chart {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Bóng mờ nhẹ */
+}
+
+.size-chart th, .size-chart td {
+    border: 1px solid #555; /* Viền xám nhạt */
+    padding: 12px;
+    text-align: center;
+    font-size: 15px;
+    color: white; /* Chữ màu trắng */
+}
+
+/* Header Bảng */
+.size-chart thead th {
+    background-color: #383838; /* Màu header tối hơn */
+    color: #FFD700; /* Màu vàng sáng cho tiêu đề cột */
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Các dòng dữ liệu */
+.size-chart tbody tr:nth-child(even) {
+    background-color: #353535; /* Hiệu ứng sọc */
+}
+
+/* Hiệu ứng khi rê chuột */
+.size-chart tbody tr:hover {
+    background-color: #4A4A4A;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.submit-wrap {
+    text-align: center; /* Căn nút ra giữa */
+    padding: 20px;     /* Khoảng cách trên dưới */
+    margin-top: 30px;  /* Khoảng cách với phần nội dung form phía trên */
+    /* Quan trọng: Đảm bảo nó không bị trôi nổi */
+    clear: both;
+}
+
+/* CSS cho nút Gửi Đơn Hàng */
+.submit-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    max-width: 400px;
+    width: 100%;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+}
+
+.submit-button:active {
+    background-color: #3e8e41;
+}
+
+.main-footer {
+    background-color: #333; /* Màu nền tối, phổ biến cho footer */
+    color: #f4f4f4;         /* Chữ màu trắng sáng */
+    padding: 40px 0 10px;   /* Khoảng đệm trên dưới */
+    font-size: 14px;
+    margin-top: 50px;       /* Đẩy footer cách xa nội dung form */
+}
+
+.footer-container {
+    max-width: 1100px;      /* Chiều rộng tối đa của nội dung footer */
+    margin: 0 auto;         /* Căn giữa */
+    padding: 0 20px;
+    display: flex;          /* Dùng Flexbox để chia cột */
+    justify-content: space-between; /* Giãn các cột ra */
+    flex-wrap: wrap;        /* Cho phép xuống dòng trên màn hình nhỏ */
+}
+
+.footer-column {
+    width: 30%;             /* Chiếm 30% chiều rộng cho mỗi cột */
+    margin-bottom: 30px;
+}
+
+.footer-column h3 {
+    color: #f4b400;         /* Màu vàng cam (Giống màu trong bảng size) */
+    font-size: 16px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #555; /* Đường gạch dưới nhẹ */
+    padding-bottom: 5px;
+}
+
+.footer-column p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+/* Style cho danh sách liên kết */
+.footer-column ul {
+    list-style: none; /* Bỏ dấu chấm đầu dòng */
+    padding: 0;
+}
+
+.footer-column li {
+    margin-bottom: 8px;
+}
+
+.footer-column a {
+    color: #ccc;            /* Màu chữ xám nhạt */
+    text-decoration: none;  /* Bỏ gạch chân */
+    transition: color 0.3s;
+}
+
+.footer-column a:hover {
+    color: #ffffff;         /* Sáng hơn khi di chuột */
+}
+
+/* Style cho Cam kết */
+.commitment {
+    font-style: italic;
+}
+
+/* Style cho liên kết mạng xã hội */
+.social-links a {
+    color: #f4b400;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+/* Dòng bản quyền cuối cùng */
+.footer-bottom {
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+    border-top: 1px solid #444; /* Đường kẻ phân cách */
+    background-color: #222;
+}
+
+/* Media Query cho màn hình nhỏ (Tối ưu trên điện thoại) */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column; /* Xếp các cột thành hàng dọc */
+        align-items: center;
+    }
+
+    .footer-column {
+        width: 100%; /* Mỗi cột chiếm toàn bộ chiều rộng */
+        text-align: center;
+        margin-bottom: 20px;
+    }
+}
+.promo-banner {
+    text-align: center;
+    margin: 30px auto;
+    max-width: 1400px;
+    padding: 0 20px;
+}
+.promo-banner img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px; /* Bo tròn góc cho ảnh */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.promo-banner p {
+    margin-top: 15px;
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+}
+.promo-banner a {
+    color: #f4b400; /* Màu nhấn */
+    text-decoration: none;
+    font-weight: bold;
+}
+@keyframes price-update-flash {
+    0% {
+        transform: scale(1);
+        color: #d9534f; /* Màu đỏ ban đầu */
+    }
+    50% {
+        transform: scale(1.05); /* Phóng to nhẹ */
+        color: #4CAF50; /* Tạm thời đổi sang màu xanh lá cây */
+    }
+    100% {
+        transform: scale(1);
+        color: #d9534f; /* Trở lại màu đỏ ban đầu */
+    }
+}
+
+.price-flash {
+    animation: price-update-flash 0.3s ease-out;
+}
+.trust-section {
+    max-width: 1100px;
+    margin: 40px auto; /* Khoảng cách trên dưới */
+    padding: 20px 20px;
+    display: flex; /* Dùng Flexbox để chia cột */
+    justify-content: space-between; /* Giãn cách đều giữa các cột */
+    gap: 15px; /* Khoảng cách giữa các cột */
+    background-color: #f8f8f8; /* Nền xám nhẹ để nổi bật */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.trust-item {
+    flex: 1; /* Mỗi cột chiếm tỉ lệ bằng nhau */
+    text-align: center;
+    padding: 15px 10px;
+    border-right: 1px solid #eee; /* Đường kẻ phân cách */
+}
+
+/* Loại bỏ đường kẻ ở cột cuối cùng */
+.trust-item:last-child {
+    border-right: none;
+}
+
+.trust-icon {
+    font-size: 30px; /* Kích thước icon/emoji lớn */
+    display: block;
+    margin-bottom: 5px;
+}
+
+.trust-item h3 {
+    font-size: 14px;
+    color: #f4b400; /* Màu nhấn */
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.trust-item p {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.4;
+}
+
+/* Media Query cho màn hình nhỏ (Xếp thành 2 hàng trên di động) */
+@media (max-width: 768px) {
+    .trust-section {
+        flex-wrap: wrap; /* Cho phép xuống dòng */
+        padding: 10px;
+    }
+
+    .trust-item {
+        width: 45%; /* Mỗi cột chiếm gần 1 nửa */
+        margin-bottom: 15px;
+        border-right: none; /* Bỏ đường kẻ dọc */
+        border-bottom: 1px dashed #ddd; /* Dùng đường kẻ đứt quãng ngang */
+    }
+
+    .trust-item:nth-child(even) {
+        border-right: none; /* Đảm bảo không có đường kẻ ở cột chẵn */
+    }
+
+    .trust-item:last-child, .trust-item:nth-child(3) {
+        border-bottom: none; /* Bỏ đường kẻ dưới cùng */
+    }
+}
+.reviews-section {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.reviews-section h2 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 30px;
+    border-bottom: 3px solid #f4b400; /* Đường kẻ nhấn mạnh */
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.review-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.review-item {
+    flex: 1; /* Chia đều 3 cột */
+    background-color: #fff;
+    border: 1px solid #eee;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Đổ bóng nhẹ */
+    text-align: left;
+    transition: transform 0.3s;
+}
+
+.review-item:hover {
+    transform: translateY(-5px); /* Hiệu ứng nhấc nhẹ khi di chuột */
+}
+
+.stars {
+    color: #f4b400; /* Màu vàng cam */
+    font-size: 18px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.review-item h3 {
+    font-size: 18px;
+    color: #4CAF50; /* Màu xanh lá cây */
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.review-item p {
+    font-style: italic;
+    color: #555;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.reviewer {
+    margin-top: 15px;
+    font-style: normal !important;
+    font-weight: bold;
+    color: #333;
+    font-size: 15px;
+}
+
+/* Tối ưu trên di động */
+@media (max-width: 768px) {
+    .review-container {
+        flex-direction: column; /* Xếp thành một cột duy nhất */
+    }
+}
+.countdown-section {
+    text-align: center;
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 20px 20px;
+    background-color: #ffe0b2; /* Màu nền cam nhạt */
+    border: 2px solid #ff9800; /* Viền cam đậm */
+    border-radius: 8px;
+}
+
+.countdown-message {
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.timer span {
+    font-size: 32px;
+    font-weight: 900; /* Rất đậm */
+    color: #d9534f; /* Màu đỏ nổi bật */
+    background-color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    display: inline-block;
+    min-width: 40px;
+}
+.input-wrap {
+    position: relative; /* Cần thiết để căn chỉnh icon */
+    margin-bottom: 15px;
+}
+
+.input-wrap input {
+    padding-right: 35px; /* Tạo khoảng trống cho checkmark */
+}
+
+.validation-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #4CAF50; /* Màu xanh lá cây */
+    display: none; /* Mặc định ẩn đi */
+}
+.form-section input,
+.form-section select,
+.form-section textarea {
+    box-sizing: border-box; /* RẤT QUAN TRỌNG: Padding và border sẽ nằm trong chiều rộng 100% */
+    width: 100%; /* Đảm bảo chúng chiếm toàn bộ chiều rộng của thẻ cha (form-section) */
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #555;
+    border-radius: 6px;
+    background-color: #222;
+    color: white;
+    font-size: 16px;
+}
+
+
+.form-section .input-wrap {
+    width: 100%;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.form-section .input-wrap input {
+    width: 100%;
+}

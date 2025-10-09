@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ANH HUY FOOTBALL STORE - Biểu Mẫu Đặt Hàng</title>
+  <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+<header>
+  <h1>⚽ ANH HUY FOOTBALL STORE</h1>
+  <p>Nơi mua sắm áo đấu và giày bóng đá chính hãng</p>
+</header>
+<form action="/submit-order" method="POST">
+  <div class="promo-banner">
+    <img src="https://file.hstatic.net/1000398692/collection/banner_sieu_uu_dai_mua_1_tang_2_bd86058d845041f7a49aa1075bad69f9.jpg" alt="Sản phẩm mới mùa giải" class="responsive-img">
+    <p>Giảm giá 15% cho tất cả áo đấu mới! <a href="#order-form">Đặt hàng ngay</a></p>
+  </div>
+  <div class="trust-section">
+    <div class="trust-item">
+        <span class="trust-icon">💯</span>
+        <h3>CHÍNH HÃNG 100%</h3>
+        <p>Phát hiện hàng giả, đền tiền gấp đôi. Chất lượng được đảm bảo.</p>
+    </div>
+    <div class="trust-item">
+        <span class="trust-icon">📦</span>
+        <h3>KIỂM TRA HÀNG TẠI NHÀ</h3>
+        <p>Thanh toán khi nhận hàng (COD). Được kiểm tra thoải mái trước khi trả tiền.</p>
+    </div>
+    <div class="trust-item">
+        <span class="trust-icon">🔄</span>
+        <h3>ĐỔI TRẢ 7 NGÀY</h3>
+        <p>Hỗ trợ đổi size hoặc sản phẩm mới trong vòng 7 ngày nếu lỗi do nhà sản xuất.</p>
+    </div>
+    <div class="trust-item">
+        <span class="trust-icon">🤝</span>
+        <h3>TƯ VẤN CHUYÊN NGHIỆP</h3>
+        <p>Đội ngũ am hiểu bóng đá sẵn sàng hỗ trợ bạn chọn size và mẫu mã phù hợp nhất.</p>
+    </div>
+  </div>
+
+  <div id="order-form" class="container">
+
+    <div class="form-section customer-section">
+      <h2> Thông tin người mua</h2>
+      <label for="fullName">Họ và tên: <span>*</span></label>
+      <div class="input-wrap">
+        <input type="text" id="fullName" name="fullName" placeholder="Nhập họ tên" required>
+        <span class="validation-icon" id="fullName-check"></span>
+      </div>
+
+      <label for="phone">Số điện thoại: <span>*</span></label>
+      <div class="input-wrap">
+        <input type="tel" id="phone" name="phone" placeholder="VD: 0987654321" required>
+        <span class="validation-icon" id="phone-check"></span>
+      </div>
+
+      <label for="email">Email: <span>*</span></label>
+      <div class="input-wrap">
+        <input type="email" id="email" name="email" placeholder="VD: anhhuy@gmail.com">
+        <span class="validation-icon" id="email-check"></span>
+      </div>
+      <label for="address">Địa chỉ: <span>*</span></label>
+      <div class="input-wrap">
+        <input type="text" id="address" name="address" placeholder="Số nhà, tên đường, Phường/Xã, Quận/Huyện" required>
+        <span class="validation-icon" id="address-check"></span>
+      </div>
+
+      <div class="button-wrap">
+        <button type="button">Lưu thông tin</button>
+      </div>
+    </div>
+
+    <div class="form-section product-section">
+      <h2 style="color: #FF9800;">Thông tin sản phẩm</h2>
+
+      <div id="dynamic-product-forms">
+          </div>
+
+      <button type="button" onclick="addProductForm()"
+              style="margin-top: 20px; padding: 10px 15px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; width: 100%;">
+          + Thêm Sản Phẩm Khác vào Đơn
+      </button>
+
+      <div id="instant-summary-box" style="margin-top: 30px; padding: 15px; background-color: #3C3C3C; border-radius: 8px; border-left: 5px solid #FF9800;">
+          <h3 style="color: #FF9800; border-bottom: 1px solid #555; padding-bottom: 5px; margin-bottom: 10px;">🛒 Tóm Tắt Đơn Hàng</h3>
+
+          <div id="summary-details" style="color: white; margin-bottom: 10px;">Chưa có sản phẩm nào được thêm.</div>
+
+          <p style="color: white; font-weight: bold; margin-top: 10px; border-top: 1px dashed #555; padding-top: 10px;">
+              Tổng Số Lượng: <span id="summary-quantity">0</span> | Tổng Tiền: <span id="summary-total-price">0 VNĐ</span>
+          </p>
+      </div>
+
+      <div id="sizePopup" class="popup">
+        <div class="popup-content">
+            <span id="closePopup" class="close">&times;</span>
+            <h2>Bảng hướng dẫn chọn size áo</h2>
+            <table class="size-chart">
+              <thead>
+                <tr><th>Size</th><th>Chiều cao (cm)</th><th>Cân nặng (kg)</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>S</td><td>155 - 165</td><td>45 - 55</td></tr>
+                <tr><td>M</td><td>165 - 170</td><td>55 - 65</td></tr>
+                <tr><td>L</td><td>170 - 175</td><td>65 - 75</td></tr>
+                <tr><td>XL</td><td>175 - 180</td><td>75 - 85</td></tr>
+                <tr><td>XXL</td><td>180+</td><td>85+</td></tr>
+              </tbody>
+            </table>
+            <h3 style="margin-top:20px; color:#f4b400;">Bảng chọn size giày</h3>
+            <table class="size-chart">
+              <thead>
+                <tr><th>Chiều dài chân (cm)</th><th>Size EU</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>24.5</td><td>39</td></tr>
+                <tr><td>25.0</td><td>40</td></tr>
+                <tr><td>25.5</td><td>41</td></tr>
+                <tr><td>26.0</td><td>42</td></tr>
+                <tr><td>26.5</td><td>43</td></tr>
+                <tr><td>27.0</td><td>44</td></tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+
+</div> <div class="bottom-sections-wrap">
+
+    <div class="form-section notes-section">
+      <h2> Ghi chú & Thanh toán</h2>
+      <label for="paymentMethod">Phương thức Thanh toán: <span>*</span></label>
+      <select id="paymentMethod" name="paymentMethod" required>
+        <option value="COD">COD (Thanh toán khi nhận hàng)</option>
+        <option value="BankTransfer">Chuyển khoản Ngân hàng</option>
+        <option value="OnlinePayment">Thanh toán Trực tuyến (Visa/Mastercard)</option>
+      </select>
+
+      <label for="specialRequests">Yêu cầu/Ghi chú Đặc biệt:</label>
+      <textarea id="specialRequests" name="specialRequests"
+                placeholder="Ví dụ: Gói quà, kiểm tra hàng trước khi thanh toán, giao hàng sau 5 giờ chiều..."
+                rows="4"></textarea>
+    </div>
+
+    <div class="action-summary-wrap">
+      <div class="submit-wrap">
+          <button type="submit" class="submit-button">
+              GỬI ĐƠN HÀNG NGAY
+          </button>
+      </div>
+
+      <div class="countdown-section">
+          <p class="countdown-message">🔥 Ưu đãi **MIỄN PHÍ SHIP** kết thúc sau:</p>
+          <div id="countdown-timer" class="timer">
+              <span id="days">00</span> Ngày :
+              <span id="hours">00</span> Giờ :
+              <span id="minutes">00</span> Phút :
+              <span id="seconds">00</span> Giây
+          </div>
+      </div>
+    </div>
+</div>
+
+</form>
+<div class="reviews-section">
+    <h2>Khách Hàng Nói Gì Về Chúng Tôi?</h2>
+    <div class="review-container">
+        <div class="review-item">
+            <span class="stars">⭐⭐⭐⭐⭐</span>
+            <h3>"Áo đấu chất lượng, đáng tiền!"</h3>
+            <p>“Vải thoáng mát, in ấn chuẩn chỉnh. Đặc biệt, nhân viên tư vấn rất nhiệt tình, giúp tôi chọn được size giày ưng ý. Chắc chắn sẽ giới thiệu cho bạn bè.”</p>
+            <p>“Đặt hàng buổi chiều hôm trước, hôm sau đã nhận được. Quá yên tâm vì được kiểm tra hàng chính hãng trước khi thanh toán. Sẽ tiếp tục ủng hộ store!”</p>
+            <p class="reviewer"> Lương Anh Huy </p>
+        </div>
+        </div>
+</div>
+<footer id="contact" class="main-footer">
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3>ANH HUY FOOTBALL STORE</h3>
+            <p>📍 Địa chỉ: Số 21/375/25 phố 8/3, phường Quỳnh Mai, quận Hai Bà Trưng, Hà Nội</p>
+            <p>☎️ Điện thoại: 0965 899 414</p>
+            <p>📧 Email: luonganhhuy2004@gmail.com</p>
+        </div>
+
+        <div class="footer-column">
+            <h3>Hỗ trợ Khách hàng</h3>
+            <ul>
+                <li><a href="#chinhsach">Chính sách Đổi trả</a></li>
+                <li><a href="#vanchuyen">Chính sách Vận chuyển</a></li>
+                <li><a href="#baohanh">Chính sách Bảo hành</a></li>
+                <li><a href="#hoidap">Câu hỏi Thường gặp (FAQ)</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h3>Cam kết từ Cửa hàng</h3>
+            <p class="commitment"> Cam kết sản phẩm chính hãng.</p>
+            <p class="commitment"> Giao hàng toàn quốc. Kiểm tra hàng trước khi thanh toán.</p>
+            <div class="social-links">
+                <a href="#facebook" target="_blank">Facebook</a> | <a href="#instagram" target="_blank">Instagram</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2025 Anh Huy Football Store. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+<script src="nhap.js"></script>
+</html>
