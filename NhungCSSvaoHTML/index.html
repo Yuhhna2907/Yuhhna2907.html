@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Example</title>
+
+  <!-- Internal-style -->
+  <style>
+      body {
+          font-family: Arial, sans-serif;
+      }
+
+      h1 {
+          color: green;
+      }
+
+      /* Phần 2: internal-style */
+      #internal {
+          color: gray;
+      }
+  </style>
+
+  <!-- External-style -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<p>Hãy tạo một trang web đơn giản với nội dung bao gồm 1 tiêu đề và 1 đoạn văn:</p>
+
+<h1>This is heading 1</h1>
+
+<!-- Inline-style -->
+<p style="color: blue;">
+  This is an ordinary paragraph. Notice that this text is blue.
+  The default text color for a page is defined in the body selector.
+</p>
+
+<!-- Phần 1: inline-style -->
+<p style="color: black;">
+  Phần 1: Hãy thay đổi màu sắc của văn bản sử dụng inline-style
+</p>
+
+<!-- Phần 2: internal-style -->
+<p id="internal">
+  Phần 2: Hãy thay đổi màu sắc của văn bản sử dụng internal-style
+</p>
+
+<!-- Phần 3: external-style -->
+<p class="external">
+  Phần 3: Hãy thay đổi màu sắc của văn bản sử dụng external-style
+</p>
+
+</body>
+</html>
