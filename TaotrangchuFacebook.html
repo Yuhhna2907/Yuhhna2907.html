@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Fakebook</title>
+  <style>
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+
+      /* BODY */
+      body {
+          font-family: Arial, Helvetica, sans-serif;
+          background-color: #f0f2f5;
+      }
+
+      /* HEADER FIXED */
+      .header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 60px;
+          background-color: #1877f2;
+          color: white;
+
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          padding: 0 20px;
+          z-index: 1000;
+      }
+
+      .header input {
+          width: 40%;
+          padding: 7px 12px;
+          border-radius: 20px;
+          border: none;
+          outline: none;
+      }
+
+      .logo {
+          font-size: 22px;
+          font-weight: bold;
+      }
+
+      /* SIDEBARS */
+      .sidebar {
+          position: fixed;
+          top: 60px; /* dưới header */
+          width: 220px;
+          height: calc(100vh - 60px);
+          background-color: #fff;
+          padding: 15px;
+      }
+
+      .sidebar.left {
+          left: 0;
+      }
+
+      .sidebar.right {
+          right: 0;
+      }
+
+      .sidebar ul {
+          list-style: none;
+      }
+
+      .sidebar li {
+          padding: 10px;
+          border-radius: 8px;
+          cursor: pointer;
+      }
+
+      .sidebar li:hover {
+          background-color: #e4e6eb;
+      }
+
+      /* MAIN CONTENT */
+      .content {
+          margin-top: 60px;
+          margin-left: 220px;
+          margin-right: 220px;
+          padding: 20px;
+      }
+
+      /* POST */
+      .post {
+          background-color: white;
+          padding: 15px;
+          border-radius: 8px;
+          margin-bottom: 15px;
+      }
+
+      .post h4 {
+          margin-bottom: 8px;
+      }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">fakebook</div>
+  <input type="text" placeholder="Tìm kiếm trên Fakebook">
+  <div class="profile">👤</div>
+</header>
+
+<!-- SIDEBAR LEFT -->
+<aside class="sidebar left">
+  <ul>
+    <li>🏠 Trang chủ</li>
+    <li>👥 Bạn bè</li>
+    <li>📺 Watch</li>
+    <li>🛒 Marketplace</li>
+    <li>📅 Kỷ niệm</li>
+  </ul>
+</aside>
+
+<!-- MAIN CONTENT -->
+<main class="content">
+  <div class="post">
+    <h4>Nguyễn Văn A</h4>
+    <p>Hôm nay trời đẹp ghê 😄</p>
+  </div>
+
+  <div class="post">
+    <h4>Trần Thị B</h4>
+    <p>Học CSS layout fixed header + sidebar 😎</p>
+  </div>
+
+  <div class="post">
+    <h4>Lê Văn C</h4>
+    <p>Fakebook nhìn cũng giống ghê ha!</p>
+  </div>
+</main>
+
+<!-- SIDEBAR RIGHT -->
+<aside class="sidebar right">
+  <h4>Người liên hệ</h4>
+  <p>🟢 Nam</p>
+  <p>🟢 Lan</p>
+  <p>🟢 Minh</p>
+</aside>
+
+</body>
+</html>
