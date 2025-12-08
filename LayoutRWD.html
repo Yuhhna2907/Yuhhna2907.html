@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang Web Mẫu</title>
+  <style>
+      /* Reset & base */
+      * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+      }
+
+      body {
+          font-family: Arial, sans-serif;
+          background-image: url('https://source.unsplash.com/1600x900/?technology,abstract');
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-position: center;
+          color: #333;
+      }
+
+      /* Container layout */
+      .container {
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+      }
+
+      /* Header & Navigation */
+      header {
+          background-color: #000;
+          color: white;
+      }
+
+      .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 12px 20px;
+      }
+
+      /* Nhóm bên trái: Logo + menu */
+      .left-links {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+      }
+
+      .logo {
+          font-size: 20px;
+          font-weight: bold;
+          color: #fff;
+      }
+
+      .left-links ul {
+          list-style: none;
+          display: flex;
+          gap: 20px;
+      }
+
+      .left-links ul li a {
+          color: #aaa;
+          text-decoration: none;
+          font-size: 16px;
+          padding: 6px 10px;
+          border-radius: 4px;
+          transition: color 0.3s ease;
+      }
+
+      .left-links ul li a:hover {
+          color: #fff;
+          text-decoration: underline;
+      }
+
+      .left-links ul li a.active {
+          color: #fff;
+          font-weight: bold;
+      }
+
+      /* Nhóm bên phải: Login */
+      .right-links a {
+          color: #aaa;
+          text-decoration: none;
+          font-size: 16px;
+          transition: color 0.3s ease;
+      }
+
+      .right-links a:hover {
+          color: #fff;
+      }
+
+      /* Main content layout */
+      .content {
+          display: flex;
+          flex: 1;
+          padding: 20px;
+          gap: 20px;
+          flex-wrap: wrap;
+      }
+
+      /* Sidebar left */
+      .sidebar.left {
+          flex: 1;
+          min-width: 150px;
+      }
+
+      .sidebar.left a {
+          display: block;
+          margin-bottom: 10px;
+          color: #333;
+          text-decoration: none;
+          transition: all 0.3s ease;
+      }
+
+      .sidebar.left a:hover {
+          color: #0077cc;
+          font-weight: bold;
+      }
+
+      /* Main content */
+      main {
+          flex: 2;
+          min-width: 300px;
+      }
+
+      main h1, main h2 {
+          margin-bottom: 10px;
+      }
+
+      main p {
+          margin-bottom: 15px;
+          line-height: 1.6;
+      }
+
+      /* Sidebar right */
+      .sidebar.right {
+          flex: 1;
+          min-width: 150px;
+      }
+
+      .sidebar.right .ads {
+          background-color: #eee;
+          padding: 10px;
+          margin-bottom: 10px;
+          text-align: center;
+          transition: all 0.3s ease;
+      }
+
+      .sidebar.right .ads:hover {
+          background-color: #ddd;
+          transform: scale(1.05);
+      }
+
+      /* Footer */
+      footer {
+          background-color: #333;
+          color: white;
+          text-align: center;
+          padding: 10px;
+          transition: background-color 0.3s ease;
+      }
+
+      footer:hover {
+          background-color: #444;
+      }
+
+      /* Responsive layout */
+      @media (max-width: 768px) {
+          .content {
+              flex-direction: column;
+          }
+
+          .left-links ul {
+              flex-direction: column;
+              gap: 10px;
+          }
+      }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <nav class="navbar">
+      <div class="left-links">
+        <div class="logo">Logo</div>
+        <ul>
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="right-links">
+        <a href="#"><i class="fa fa-sign-in-alt"></i> Login</a>
+      </div>
+    </nav>
+  </header>
+
+  <div class="content">
+    <aside class="sidebar left">
+      <a href="#">Link</a>
+      <a href="#">Link</a>
+      <a href="#">Link</a>
+    </aside>
+
+    <main>
+      <h1>Welcome</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+      <h2>Test</h2>
+      <p>Lorem ipsum dolor sit amet...</p>
+    </main>
+
+    <aside class="sidebar right">
+      <div class="ads">ADS</div>
+      <div class="ads">ADS</div>
+    </aside>
+  </div>
+
+  <footer>
+    <p>Footer Text</p>
+  </footer>
+</div>
+</body>
+</html>
